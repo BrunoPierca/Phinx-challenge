@@ -1,20 +1,24 @@
-import { Box, Card, LinearProgress, Stack, Typography } from '@mui/material'
+import { Box, Card, Divider, LinearProgress, Stack, Typography } from '@mui/material'
 import { Pokemon } from '../Config/interfaces'
 
 
 export const PokemonCard = ({ pokemon }: { pokemon: Pokemon }) => {
     return (
         <Card sx={{
-            padding: 2
+            padding: 2,
+            display:'flex',
+            flexDirection:"column"
         }}>
             <img src={pokemon.imageUrl} alt={`Image of ${pokemon.name}`} style={{
                 maxWidth: "260px",
+                width: "80%",
+                margin: "0 auto"
             }} />
-            <Typography variant='h5'>
+            <Typography variant='h5' pb={0.5}>
                 {pokemon.name}
             </Typography>
-            <hr />
-            <Stack direction={"column"}>
+            <Divider />
+            <Stack direction={"column"} pb={0.5}>
                 {['hp', 'attack', 'defense', 'speed'].map((stat) => <StatItem
                     key={stat}
                     name={stat}
