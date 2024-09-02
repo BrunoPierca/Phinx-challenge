@@ -3,8 +3,8 @@ import { Entity, PrimaryGeneratedColumn, ManyToOne, CreateDateColumn } from 'typ
 
 @Entity()
 export class Battle {
-    @PrimaryGeneratedColumn()
-    id: number;
+    @PrimaryGeneratedColumn("uuid")
+    id: string;
 
     @ManyToOne(() => Pokemon)
     winner: Pokemon;
