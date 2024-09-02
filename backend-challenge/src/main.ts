@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { timeOutInterceptor } from './config';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -11,6 +12,13 @@ async function bootstrap() {
 
 
   app.useGlobalInterceptors(new timeOutInterceptor())
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+    })
+  );
 
 
   if(configService.get("FRONTEND_URL")) app.enableCors({ origin: configService.get("FRONTEND_URL")})
