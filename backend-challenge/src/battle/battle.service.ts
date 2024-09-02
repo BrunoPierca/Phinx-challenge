@@ -39,7 +39,7 @@ export class BattleService {
 
   findAll() {
     try {
-      return this.battleRepository.find({ relations: ['winner', 'loser'] })
+      return this.battleRepository.find({ relations: ['winner', 'loser'], take: 10, order: { date: 'DESC' } })
     } catch (error) {
       this.handleDBExceptions(error)
     }
