@@ -3,7 +3,7 @@ import { publicAxiosInstance } from "./config";
 
 export const getBattles = async (): Promise<Battle[]> => {
     const { data } = await publicAxiosInstance.get<Battle[]>(`/battle`,)
-    return { ...data }
+    return data
 };
 
 
