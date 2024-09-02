@@ -1,13 +1,14 @@
-import { Box, Card, Divider, LinearProgress, Stack, Typography } from '@mui/material'
+import { Box, Card, CircularProgress, Divider, LinearProgress, Stack, Typography } from '@mui/material'
 import { Pokemon } from '../interfaces'
 
 
 export const PokemonCard = ({ pokemon }: { pokemon: Pokemon }) => {
+    if (!pokemon) <CircularProgress />
     return (
         <Card sx={{
             padding: 2,
-            display:'flex',
-            flexDirection:"column"
+            display: 'flex',
+            flexDirection: "column"
         }}>
             <img src={pokemon.imageUrl} alt={`Image of ${pokemon.name}`} style={{
                 maxWidth: "260px",
