@@ -11,7 +11,7 @@ export interface Pokemon {
 }
 
 export interface Battle {
-    id: number;
+    id: string;
 
     winner: Pokemon;
 
