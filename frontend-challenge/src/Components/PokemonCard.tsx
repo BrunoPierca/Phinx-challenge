@@ -1,5 +1,5 @@
 import { Box, Card, Divider, LinearProgress, Stack, Typography } from '@mui/material'
-import { Pokemon } from '../Config/interfaces'
+import { Pokemon } from '../interfaces'
 
 
 export const PokemonCard = ({ pokemon }: { pokemon: Pokemon }) => {
