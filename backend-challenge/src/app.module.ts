@@ -3,25 +3,35 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PokemonModule } from './pokemon/pokemon.module';
-import { ConfigModule } from '@nestjs/config';
-import { EnvConfiguration, JoiValidationSchema } from './config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { DBConfiguration, EnvConfiguration, JoiValidationSchema } from './config';
 import { BattleModule } from './battle/battle.module';
+import { SeedService } from './seed/seed.service';
+import { SeedModule } from './seed/seed.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      load: [EnvConfiguration],
+      isGlobal: true,
+      cache: true,
+      load: [EnvConfiguration, DBConfiguration],
       validationSchema: JoiValidationSchema
     }),
-    TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: process.env.DB_FILE_NAME,
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: process.env.NODE_ENV === 'development' ? true : false,
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) => ({
+        ...configService.get('database'),
+      }),
+      inject: [ConfigService],
     }),
+    SeedModule,
     PokemonModule,
     BattleModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private readonly seedService: SeedService) {
+    this.seedService.seed();
+  }
+}
