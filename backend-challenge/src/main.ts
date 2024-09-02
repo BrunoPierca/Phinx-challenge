@@ -21,9 +21,9 @@ async function bootstrap() {
   );
 
 
-  if(configService.get("FRONTEND_URL")) app.enableCors({ origin: configService.get("FRONTEND_URL")})
+  app.enableCors()
 
-  
+
   //Swagger
   const options = new DocumentBuilder()
     .setTitle('PokeChallenge API')
@@ -38,8 +38,8 @@ async function bootstrap() {
       customSiteTitle: 'Phinx challenge API Docs',
     }
   })
- 
-  await app.listen(configService.get("PORT"));
-  console.log(`App running on port ${configService.get("PORT")}`);
+
+  await app.listen(configService.get("PORT") ?? 5000);
+  console.log(`App running on port ${configService.get("PORT") ?? 5000}`);
 }
 bootstrap();
