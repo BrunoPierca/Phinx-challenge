@@ -1,4 +1,4 @@
-import { Button,  Stack, Typography } from "@mui/material"
+import { Button, Stack, Typography } from "@mui/material"
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 import { useState } from "react";
 import { BattleLog } from "./BattleLog";
@@ -18,10 +18,7 @@ export const Navbar = () => {
                 <LeaderboardIcon />
             </Button>
 
-            <BattleLog
-                open={open}
-                handleClose={handleClose}
-            />
+            {open && <BattleLog handleClose={handleClose} />}
         </Stack>
     )
 }

@@ -9,7 +9,7 @@ const getLatestBattles = async () => {
 }
 
 
-export const BattleLog = ({open, handleClose} : {open: boolean, handleClose: () => void}) => {
+export const BattleLog = ({ handleClose }: { handleClose: () => void }) => {
     const [battles, setBattles] = useState<Battle[] | null>(null)
 
     useEffect(() => {
@@ -18,7 +18,7 @@ export const BattleLog = ({open, handleClose} : {open: boolean, handleClose: () 
 
     return (
         <Modal
-            open={open}
+            open={true}
             onClose={handleClose}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
@@ -33,7 +33,6 @@ export const BattleLog = ({open, handleClose} : {open: boolean, handleClose: () 
                 boxShadow: 24,
                 borderRadius: 6,
                 p: 4,
-                px: 8
             }}>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
                     Battle log
@@ -41,7 +40,7 @@ export const BattleLog = ({open, handleClose} : {open: boolean, handleClose: () 
                 <Typography id="modal-modal-description" sx={{ my: 2 }}>
                     Check the last 10 battle results:
                 </Typography>
-                <Stack direction={"column"} gap={2} maxHeight={"60dvh"} sx={{
+                <Stack direction={"column"} gap={2} maxHeight={"60dvh"}  sx={{
                     overflowY: "scroll",
                 }}>
                     {!battles ? <CircularProgress /> : battles.map((battle) => <>
