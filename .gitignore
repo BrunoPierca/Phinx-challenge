@@ -3,3 +3,4 @@ backend-challenge/pokeDB
 
 # env
 backend-challenge/.env
+frontend-challenge/.env
