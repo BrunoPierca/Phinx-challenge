@@ -17,6 +17,9 @@ export class BattleService {
   ) { }
 
   async create(createBattleDto: CreateBattleDto) {
+
+    if (createBattleDto.pokemonOne === createBattleDto.pokemonTwo) throw new BadRequestException("Pokemon can't be the same")
+
     const pokemonOne = await this.pokemonService.findOne(createBattleDto.pokemonOne)
 
     const pokemonTwo = await this.pokemonService.findOne(createBattleDto.pokemonTwo)
@@ -36,7 +39,7 @@ export class BattleService {
 
   findAll() {
     try {
-      return this.battleRepository.find()
+      return this.battleRepository.find({ relations: ['winner', 'loser'] })
     } catch (error) {
       this.handleDBExceptions(error)
     }
